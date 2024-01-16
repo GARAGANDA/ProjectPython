@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for vacancy in vacancies %}
+<a>Название вакансии: {{ vacancy.name }}</a><br>
+<a>Зарплата: {{ vacancy.salary }}</a><br>
+<a>Город: {{ vacancy.area }}</a><br>
+<a>Работодатель: {{ vacancy.employer }}</a><br>
+<a>Дата: {{ vacancy.date }}</a><br>
+    <br>
+{% endfor %}
+</body>
+</html>
