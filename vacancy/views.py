@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 import requests
 
-from vacancy.models import TopSkills
+from vacancy.models import TopSkills, MainPage
 
 
 # Create your views here.
@@ -47,3 +47,29 @@ def top_skills(request):
         res_profession[year] = TopSkills.objects.filter(year=year, is_profession=True)
     print(res, res_profession)
     return render(request, 'topskills.html', {'years':years,'res':res,'res_profession':res_profession})
+
+def geography_salary(request):
+    res = {}
+    res_profession = {}
+    areas = TopSkills.objects.all().order_by('area_name').values("area_name").distinct()
+    for ls in areas:
+        area = ls['area_name']
+        res[area] = TopSkills.objects.filter(area_name=area, is_profession=False)
+        res_profession[area] = TopSkills.objects.filter(area_name=area, is_profession=True)
+    return render(request, 'geographysalary.html', {'area_name':areas,'res':res,'res_profession':res_profession})
+
+def relevancy_salary(request):
+    res = {}
+    res_profession = {}
+    years = TopSkills.objects.all().order_by('year').values("year").distinct()
+    for ls in years:
+        year = ls['year']
+        res[year] = TopSkills.objects.filter(year=year, is_profession=False)
+        res_profession[year] = TopSkills.objects.filter(year=year, is_profession=True)
+    return render(request, 'relevancesalary.html', {'years':years,'res':res,'res_profession':res_profession})
+
+def index(request):
+    mainpage = MainPage.objects.filter(is_set=True)[0]
+    return render(request,'index.html',{'mainpage':mainpage})
+
+

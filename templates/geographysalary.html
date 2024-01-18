@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+{% for obj, skills in res.items %}
+<tr>
+<th>{{ obj }}</th>
+</tr>
+{% for skill in skills %}
+<tr>
+<th>{{ skill.salary }}</th>
+</tr>
+{% endfor %}
+{% endfor %}
+
+</table>
+<table>
+{% for obj, skills in res.items %}
+<tr>
+<th>{{ obj }}</th>
+</tr>
+{% for skill in skills %}
+<tr>
+<th>{{ skill.fraction }}</th>
+</tr>
+{% endfor %}
+{% endfor %}
+</table>
+</body>
+
+</html>
