@@ -19,7 +19,7 @@ class RelevanceSalary(models.Model):
 
 class MainPage(models.Model):
     header = models.CharField(max_length=40)
-    description = models.CharField(max_length=40)
+    description = models.CharField(max_length=3000)
     image = models.FileField()
     is_set = models.BooleanField()
 

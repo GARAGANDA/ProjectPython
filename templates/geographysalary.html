@@ -1,35 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+   <title>Page Title</title>
+   <style>
+      body {
+         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+         margin: 0;
+      }
+      .header {
+         padding: 30px;
+         text-align: center;
+         background: #bc1a6b;
+         color: white;
+         font-size: 30px;
+      }
+      main {
+         padding: 20px;
+         font-size: 18px;
+      }
+      .footer {
+       padding: 30px;
+       text-align: center;
+       background: #bc1a6b;
+       color: white;
+       font-size: 30px;
+      }
+      .menu {
+   position: absolute;
+   top: 0;
+   left: 0;
+          padding: 40px;
+   width: 200px;
+   height: 100%;
+}
+
+    .menu ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+    }
+
+    .menu li {
+       margin-bottom: 10px;
+    }
+
+    .menu a {
+       color: white;
+       text-decoration: none;
+    }
+    .main-content {
+   margin: 0 200px 0 200px;
+   font-size: 18px;
+}
+    table {
+  {#float: left;#}
+  width: 30%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+   </style>
 </head>
 <body>
-<table>
-{% for obj, skills in res.items %}
-<tr>
-<th>{{ obj }}</th>
-</tr>
-{% for skill in skills %}
-<tr>
-<th>{{ skill.salary }}</th>
-</tr>
-{% endfor %}
-{% endfor %}
+    <div class="header">
+      <h1>Backend Stat ⇅</h1>
+   </div>
+    <div class="menu">
+      <ul>
+         <li><a href="../">Главная страница</a></li>
+         <li><a href="../relevancy">Востребованность</a></li>
+         <li><a href="../geography">География</a></li>
+         <li><a href="../topskills">Навыки</a></li>
+         <li><a href="../hh_api">Последние вакансии</a></li>
 
-</table>
+      </ul>
+   </div>
+    <div class="main-content">
 <table>
+<thead>
+<tr>
+<th>Город</th>
+<td>Зарплата</td>
+</tr>
+</thead>
+<tbody>
 {% for obj, skills in res.items %}
 <tr>
 <th>{{ obj }}</th>
-</tr>
 {% for skill in skills %}
-<tr>
-<th>{{ skill.fraction }}</th>
+<td>{{ skill.salary }}</td>
 </tr>
 {% endfor %}
 {% endfor %}
+</tbody>
 </table>
+<br>
+<table>
+<thead>
+<tr>
+<th>Город</th>
+<td>Зарплата</td>
+</tr>
+</thead>
+<tbody>
+{% for obj, skills in res.items %}
+<tr>
+<th>{{ obj }}</th>
+{% for skill in skills %}
+<td>{{ skill.fraction }}</td>
+</tr>
+{% endfor %}
+{% endfor %}
+</tbody>
+</table>
+<br>
+<table>
+<thead>
+<tr>
+<th>Город</th>
+<td>Зарплата</td>
+</tr>
+</thead>
+<tbody>
+{% for obj, skills in res_profession.items %}
+<tr>
+<th>{{ obj }}</th>
+{% for skill in skills %}
+<td>{{ skill.salary }}</td>
+</tr>
+{% endfor %}
+{% endfor %}
+</tbody>
+</table>
+<br>
+<table>
+<thead>
+<tr>
+<th>Город</th>
+<td>Зарплата</td>
+</tr>
+</thead>
+<tbody>
+{% for obj, skills in res_profession.items %}
+<tr>
+<th>{{ obj }}</th>
+{% for skill in skills %}
+<td>{{ skill.fraction }}</td>
+</tr>
+{% endfor %}
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+   <p>Соколов Алексей Александрович РИ-220913</p>
+</div>
 </body>
-
 </html>

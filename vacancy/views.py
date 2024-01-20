@@ -2,12 +2,12 @@ from django.http import JsonResponse
 from django.shortcuts import render
 import requests
 
-from vacancy.models import TopSkills, MainPage
+from vacancy.models import TopSkills, MainPage, GeographySalary
 
 
 # Create your views here.
 def hhru_api(request):
-    api_url = "https://api.hh.ru/vacancies?text=python&period=1"
+    api_url = "https://api.hh.ru/vacancies?text=backend&period=1"
     response = requests.get(api_url)
     response_json = response.json()
     result = []
@@ -45,17 +45,20 @@ def top_skills(request):
         year=ls['year']
         res[year] = TopSkills.objects.filter(year=year, is_profession=False)
         res_profession[year] = TopSkills.objects.filter(year=year, is_profession=True)
-    print(res, res_profession)
     return render(request, 'topskills.html', {'years':years,'res':res,'res_profession':res_profession})
 
 def geography_salary(request):
     res = {}
     res_profession = {}
-    areas = TopSkills.objects.all().order_by('area_name').values("area_name").distinct()
+    areas = GeographySalary.objects.all().order_by('area_name').values("area_name").distinct()
     for ls in areas:
         area = ls['area_name']
-        res[area] = TopSkills.objects.filter(area_name=area, is_profession=False)
-        res_profession[area] = TopSkills.objects.filter(area_name=area, is_profession=True)
+        obgs = GeographySalary.objects.filter(area_name=area, is_profession=False)
+        if obgs:
+            res[area] = obgs
+        objs = GeographySalary.objects.filter(area_name=area, is_profession=True)
+        if objs:
+            res_profession[area] = objs
     return render(request, 'geographysalary.html', {'area_name':areas,'res':res,'res_profession':res_profession})
 
 def relevancy_salary(request):

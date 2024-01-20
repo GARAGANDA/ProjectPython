@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from vacancy import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hh_api/', views.hhru_api),
-    path('topskills/', views.top_skills)
-]
+    path('topskills/', views.top_skills),
+    path('geography/', views.geography_salary),
+    path('relevancy/', views.relevancy_salary),
+    path('', views.index),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
